@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css" media="screen">
+      /* demo gloss */
+      body { background: radial-gradient(at 80% 33%, #009CDE, #1c2345); font-family: sans-serif; }
+      h1 { text-align: center; color: white; font-weight: 400; border-bottom: 1px solid rgba(255,255,255,0.5); padding-bottom: 0.5em;}
+      p, .cell { color: #CCC; line-height: 1.5em; }
+      .results{ width: 600px; display: table; padding-top: 1em; }
+      .results .row { display: table-row; }
+      .results .cell { width: 50%; display: table-cell; }
+    </style>
+
+    <script type="text/javascript" src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
+    <script type="text/javascript">
+      $(function() {
+
+        function callback(data){
+          $('#check_result').text(data.found);
+        }
+        $('#email').blur(function(event) {
+          var email = $(this).val();
+          var host = $('#backend').val();
+          $('#check_email').text(email);
+          $('#check_result').text('');
+
+          var actblue = 'https://' + host + '/sources/query';
+          $.ajax({type: 'POST',
+                  url: actblue,
+                  data: {email: email},
+                  success: callback
+                });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>
+      Test express check page
+    </h1>
+
+    <div>
+      <p>
+        Specify the host to test against:
+        <input id='backend' type='text' value='secure.actblue.com'/>
+      </p>
+      <p>
+        Enter your email address, then tab out:
+        <input id='email' type='text'/>
+      </p>
+      <form>
+      </form>
+    </div>
+    <div class='results'>
+      <div class='row'>
+        <div class='cell' id='check_email'></div>
+        <div class='cell' id='check_result'></div>
+      </div>
+    </div>
+  </body>
+</html>
