@@ -18,8 +18,10 @@ window.BigNumber = {
 
     BigNumber.element.removeClass('empty');
 
-    // BigNumber.subscribeToPusherStream(key, stream, theEvent);
+    BigNumber.subscribeToPusherStream(key, stream, theEvent);
     // BigNumber.loadInitialAmount();
+    BigNumber.spinIndefinitely();
+    BigNumber.handleInitialAmount({sitewide_raised_amount: 1661292274});
   },
 
   subscribeToPusherStream: function(key, stream, theEvent) {
@@ -32,8 +34,8 @@ window.BigNumber = {
   },
 
   handleInitialAmount: function(data) {
-console.log('handleInitialAmount: ');
-console.log(data);
+// console.log('handleInitialAmount: ');
+// console.log(data);
     var raisedAmount = data.sitewide_raised_amount;
     if (typeof raisedAmount === 'string') {
       raisedAmount = parseInt(raisedAmount.replace(/,/g, ''), 10);
@@ -60,6 +62,7 @@ console.log(data);
   },
 
   displayAmount: function(amount) {
+// console.log('displayAmount: ' + amount);
     BigNumber.element.text(BigNumber.commify(amount));
     if (BigNumber.callback) {
       BigNumber.callback(amount);
@@ -81,6 +84,8 @@ console.log(data);
   },
 
   update: function(data) {
+// console.log('update:');
+// console.log(data);
     BigNumber.targetAmount = BigNumber.toDollars(data.total);
     if (BigNumber.onUpdate) {
       BigNumber.onUpdate(data);
