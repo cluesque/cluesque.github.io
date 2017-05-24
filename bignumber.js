@@ -18,8 +18,8 @@ window.BigNumber = {
 
     BigNumber.element.removeClass('empty');
 
-    BigNumber.subscribeToPusherStream(key, stream, theEvent);
-    BigNumber.loadInitialAmount();
+    // BigNumber.subscribeToPusherStream(key, stream, theEvent);
+    // BigNumber.loadInitialAmount();
   },
 
   subscribeToPusherStream: function(key, stream, theEvent) {
@@ -28,10 +28,12 @@ window.BigNumber = {
 
   loadInitialAmount: function() {
     $.getJSON('https://secure.actblue.com/metrics/bignumber', this.handleInitialAmount);
-    this.spinIndefinitely();
+    // this.spinIndefinitely();
   },
 
   handleInitialAmount: function(data) {
+console.log('handleInitialAmount: ');
+console.log(data);
     var raisedAmount = data.sitewide_raised_amount;
     if (typeof raisedAmount === 'string') {
       raisedAmount = parseInt(raisedAmount.replace(/,/g, ''), 10);
