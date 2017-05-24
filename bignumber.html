@@ -10,7 +10,7 @@
     </style>
 
     <script type="text/javascript" src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
-    <script type="text/javascript" src='pusher.min.js'></script>
+    <script type="text/javascript" src="https://js.pusher.com/4.0/pusher.min.js"></script>
     <script type="text/javascript" src='bignumber.js'></script>
     <script type="text/javascript">
     $(function() {
@@ -27,9 +27,9 @@
         'indigo_production',
         'new_contribution',
         {
+          initialAmountSource: 'https://playpen69-secure.abdemo.com/metrics/bignumber.json',
           callback: translateBignumber,
           onUpdate: function() {
-            // $('.stats-pull .contributions big').increment();
           }
         }
       ));

@@ -8,6 +8,7 @@ window.BigNumber = {
   minInterval: 100,    // Minimum interval (msec) between updates
   maxInterval: 440,    // Maximum interval (msec) between updates
   minTick: 1,          // Minimum update amount
+  initialAmountSource: 'https://secure.actblue.com/metrics/bignumber.json',
 
   init: function(element, key, stream, theEvent, opts) {
     BigNumber.element = element;
@@ -19,9 +20,7 @@ window.BigNumber = {
     BigNumber.element.removeClass('empty');
 
     BigNumber.subscribeToPusherStream(key, stream, theEvent);
-    // BigNumber.loadInitialAmount();
-    BigNumber.spinIndefinitely();
-    BigNumber.handleInitialAmount({sitewide_raised_amount: 1661292274});
+    BigNumber.loadInitialAmount();
   },
 
   subscribeToPusherStream: function(key, stream, theEvent) {
@@ -29,8 +28,8 @@ window.BigNumber = {
   },
 
   loadInitialAmount: function() {
-    $.getJSON('https://secure.actblue.com/metrics/bignumber', this.handleInitialAmount);
-    // this.spinIndefinitely();
+    $.getJSON(this.initialAmountSource, this.handleInitialAmount);
+    this.spinIndefinitely();
   },
 
   handleInitialAmount: function(data) {
