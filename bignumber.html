@@ -16,7 +16,7 @@
     $(function() {
 
       var translateBignumber = function(value) {
-        var output = '$' + commify(value);
+        var output = '$' + BigNumber.commify(value);
         $("title").text("ActBlue — " + output + ' raised online since 2004');
       };
 
@@ -29,7 +29,7 @@
         {
           callback: translateBignumber,
           onUpdate: function() {
-            $('.stats-pull .contributions big').increment();
+            // $('.stats-pull .contributions big').increment();
           }
         }
       ));
