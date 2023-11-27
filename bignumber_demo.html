@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css" media="screen">
+
+      /* demo gloss */
+      body { background: #acaeb0; font-family: sans-serif; }
+      h1 { text-align: center; color: white; font-weight: 400; border-bottom: 1px solid rgba(255,255,255,0.5); padding-bottom: 0.5em;}
+      p { color: #CCC; line-height: 1.5em; padding-bottom: 1em;}
+    </style>
+
+    <script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
+    <script src="https://js.pusher.com/4.4.0/pusher.min.js"></script>
+    <script src='https://secure.actblue.com/assets/bignumber.js'></script>
+    <script type="text/javascript">
+    $(function() {
+
+      // Demonstrating a callback that accepts the animated value of the bignumber
+      // This one updates the page title, but it could be used for anything
+      var translateBignumber = function(value) {
+        var output = '$' + BigNumber.commify(value);
+        document.title = "ActBlue — " + output + ' raised online since 2004';
+      };
+
+      $(BigNumber.init(
+        $('#sitetotal'),        // A div with this id will be updated with the animated bignumber
+        '449985a46708136f3d74', // magic pusher key
+        'indigo_production',    // pusher stream to use
+        'new_contribution',     // pusher event to listen for
+        {
+          initialAmountSource: 'https://secure.actblue.com/metrics/bignumber.json',
+          callback: translateBignumber, // Optional callback called with animated values
+          // onUpdate is called much less frequently, with the number before animation
+          // onUpdate: function(data) {
+          //   console.log('onUpdate called');
+          //   console.log(data);
+          // }
+        }
+      ));
+
+    });
+    </script>
+  </head>
+  <body>
+    <h1>
+      Test ActBlue Big Number
+    </h1>
+
+    <div id='theBigNumber'>
+      <div class='numbers'>
+        <span id="sitetotal" class="empty"></span>
+      </div>
+      <p>raised online since 2004</p>
+    </div>
+
+  </body>
+</html>
